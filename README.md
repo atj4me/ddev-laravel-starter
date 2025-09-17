@@ -1,12 +1,26 @@
+[![add-on registry](https://img.shields.io/badge/DDEV-Add--on_Registry-blue)](https://addons.ddev.com)
+[![tests](https://github.com/atj4me/ddev-laravel-starter/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/atj4me/ddev-laravel-starter/actions/workflows/tests.yml?query=branch%3Amain)
+[![last commit](https://img.shields.io/github/last-commit/atj4me/ddev-laravel-starter)](https://github.com/atj4me/ddev-laravel-starter/commits)
+[![release](https://img.shields.io/github/v/release/atj4me/ddev-laravel-starter)](https://github.com/atj4me/ddev-laravel-starter/releases/latest)
+
 # DDEV Laravel Starter
 
-[![tests](https://github.com/atj4me/ddev-laravel-starter/actions/workflows/tests.yml/badge.svg)](https://github.com/atj4me/ddev-laravel-starter/actions/workflows/tests.yml)
+## Overview
 
-A DDEV add-on that provides an optimized Laravel development environment configuration.
+This add-on integrates a Laravel-optimized configuration into your [DDEV](https://ddev.com/) project, providing a pre-configured development environment specifically tailored for Laravel applications.
 
-## What does this add-on do?
+## Installation
 
-This add-on configures your DDEV environment with Laravel-specific optimizations:
+```bash
+ddev add-on get atj4me/ddev-laravel-starter
+ddev restart
+```
+
+After installation, make sure to commit the `.ddev` directory to version control.
+
+## Usage
+
+After installation, your DDEV environment will be automatically configured with Laravel-specific optimizations:
 
 - **PHP 8.4** - Latest PHP version for modern Laravel development
 - **MariaDB 10.11** - Stable and performant database
@@ -14,19 +28,15 @@ This add-on configures your DDEV environment with Laravel-specific optimizations
 - **Composer 2** - Latest dependency manager
 - **Laravel optimization hook** - Automatically runs `php artisan optimize` on container start
 
-## Installation
-
-```bash
-ddev add-on get atj4me/ddev-laravel-starter
-```
-
-## Usage
-
-After installation, the add-on will configure your DDEV environment with Laravel-optimized settings. The configuration will be applied automatically when you start your DDEV project.
+| Command | Description |
+| ------- | ----------- |
+| `ddev describe` | View service status and used ports |
+| `ddev logs -s web` | Check web container logs |
+| `ddev exec php artisan optimize` | Manually run Laravel optimization |
 
 ## Configuration Details
 
-The add-on applies the following configuration:
+The add-on applies the following DDEV configuration:
 
 ```yaml
 type: laravel
@@ -51,10 +61,6 @@ hooks:
 
 - DDEV v1.24.3 or higher
 - A Laravel project (or a project where you plan to install Laravel)
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## Credits
 
