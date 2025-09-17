@@ -1,0 +1,40 @@
+# Details about the install.yaml file are at https://ddev.readthedocs.io/en/stable/users/extend/additional-services/#sections-and-features-of-ddev-get-add-on-installyaml
+
+name: ddev-laravel-starter
+
+# Laravel starter configuration for DDEV
+# This addon provides optimized configuration for Laravel projects
+
+# list of files and directories that are copied into project .ddev directory
+# Each file should contain #ddev-generated so it can be replaced by a later `ddev add-on get`
+# if it hasn't been modified by the user.
+project_files:
+  - config.laravel.yaml
+
+# Version constraint for DDEV that will be validated against the running DDEV executable
+# and prevent add-on from being installed if it doesn't validate.
+ddev_version_constraint: '>= v1.24.3'
+
+# Actions executed in the context of the target project's .ddev directory after installation
+post_install_actions:
+  - |
+    #ddev-description:Merge Laravel configuration into main config
+    if [ -f "${DDEV_APPROOT}/.ddev/config.yaml" ]; then
+      # If config.yaml exists, we need to merge the Laravel settings
+      echo "Merging Laravel starter configuration into existing config.yaml..."
+      # The config.laravel.yaml will be processed by DDEV automatically
+    else
+      echo "No existing config.yaml found. The Laravel configuration will be applied on next ddev start."
+    fi
+
+removal_actions:
+  - |
+    #ddev-description:Clean up Laravel starter configuration
+    if [ -f "${DDEV_APPROOT}/.ddev/config.laravel.yaml" ]; then
+      if grep -q '#ddev-generated' "${DDEV_APPROOT}/.ddev/config.laravel.yaml"; then
+        rm -f "${DDEV_APPROOT}/.ddev/config.laravel.yaml"
+        echo "Removed Laravel starter configuration."
+      else
+        echo "Unwilling to remove '${DDEV_APPROOT}/.ddev/config.laravel.yaml' because it does not have #ddev-generated in it; you can manually delete it if it is safe to delete."
+      fi
+    fi

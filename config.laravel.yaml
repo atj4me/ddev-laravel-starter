@@ -1,0 +1,20 @@
+#ddev-generated
+# Laravel Starter Configuration for DDEV
+# Optimized settings for Laravel development
+
+type: laravel
+docroot: public
+php_version: "8.4"
+webserver_type: nginx-fpm
+xdebug_enabled: false
+database:
+  type: mariadb
+  version: "10.11"
+use_dns_when_possible: true
+composer_version: "2"
+corepack_enable: false
+performance_mode: "none"
+bind_all_interfaces: false
+hooks:
+  post-start:
+    - exec: 'php artisan optimize'
